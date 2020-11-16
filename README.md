@@ -22,3 +22,4 @@ MSSE661 - Final Project
 <br>4. Complete database design 
 <br>5. Polish/Complete website layout
 <br>6. Testing / Test Suite
+<br>7. Add installation guide
