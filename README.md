@@ -20,5 +20,6 @@ MSSE661 - Final Project
 <br>2. Complete back-end programming for all features
 <br>3. Complete event-triggers for feature 2/3
 <br>4. Complete database design 
-<br>5. Polish website layout
+<br>5. Polish/Complete website layout
 <br>6. Testing / Test Suite
+<br>7. Add installation guide
