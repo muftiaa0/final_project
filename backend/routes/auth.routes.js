@@ -1,11 +1,20 @@
-const controllers = require('../controllers/auth.controller.js');
+const { 
+    newEmployee,
+    login,
+    updatePassword,
+    logout, 
+} = require('../controllers/auth.controller.js');
+
+const canAccess = require('../middleware/auth.middleware')
+
 const express = require('express');
 
 const authRoutes = express.Router();
 
 authRoutes
-    .post('/newEmployee', controllers.createPerson)
-    .post('/login', controllers.login)
-    .post('/updatePassword', controllers.updatePerson);
+    .post('/newEmployee', newEmployee)
+    .post('/login', login)
+    .put('/updatePassword', canAccess, updatePassword)
+    .post('/logout', logout);
 
 module.exports = authRoutes;

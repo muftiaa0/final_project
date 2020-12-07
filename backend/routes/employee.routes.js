@@ -1,10 +1,11 @@
-const controllers = require('../controllers/employee.controller');
 const express = require('express');
+const { getEmployee, updateEmployee } = require('../controllers/employee.controller');
+const canAccess = require('../middleware/auth.middleware')
 
 const employeeRoutes = express.Router();
 
 employeeRoutes
-    .get('/', controllers.getEmployee)
-    .put('/', controllers.updateEmployee) // only information 
+    .get('/me', canAccess, getEmployee)
+    .put('/me/update', canAccess, updateEmployee) 
 
 module.exports = employeeRoutes;

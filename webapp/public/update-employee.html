@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-wdith, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <title>Update Employee</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <ul class="navbar mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./register.html">New Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./promote-employee.html">Promote Employee</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./update-employee.html">Update Employee Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./update-password.html">Update Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" onclick="doLogout(event)">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</body>
+
+<div class="center">
+    <div class="card">
+        <div class="card-body">
+            <div class="right-border">
+                <h2 class="card-title">Update Employee Information</h2>
+                <form novalidate>
+                    <div class="form-group">
+                        <label for="formInputNewFirstName">New First Name</label>
+                        <input id="formInputNewFirstName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="formInputNewLastName">New Last Name</label>
+                        <input id="formInputNewLastName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="formInputNewHomeAddress">New Home Address</label>
+                        <input id="formInputNewHomeAddress" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group center-text">
+                        <button class="btn btn-primary" onclick="updateEmployeeInformation(event)">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="author">
+        <p>Author: <a href="https://github.com/muftiaa0">Azeem Mufti</a></p>
+    </div>
+</footer>
+<script src="./src/api.config.js"></script>
+<script src="./src/simple.storage.js"></script>
+<script src="./src/route-guard.js"></script>
+<script src="./src/service.helpers.js"></script>
+<script src="./src/employee.service.js"></script>
+<script src="./src/employee.js"></script>
+
+</html>
