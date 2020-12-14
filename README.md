@@ -33,4 +33,4 @@ MSSE661 - Final Project
 <br>3. navigate to the backend directory and do an `npm install`. Once it is done do an `npm start`. Make sure the tables are created and an admin user is created.
 <br>4. In a new terminal navigate to the frontend directory and do an `npm install. Once it is done do an `npm start`.
 <br>5. In your web browser navigate to http://localhost:3000
-<br>6. The initial user created has credentials of admin/admin. We recommend you change the password of this super user. 
+<br>6. The initial user created has credentials of admin/admin. We recommend you change the password of this super user. Remember if you change this info that some of the mocha back end tests will fail. 
