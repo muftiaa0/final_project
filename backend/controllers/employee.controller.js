@@ -4,6 +4,7 @@ const connection = require('../database-config.js');
 const { GET_EMPLOYEE_FROM_USERNAME, UPDATE_EMPLOYEE_LAST_NAME, UPDATE_EMPLOYEE_FIRST_NAME, UPDATE_EMPLOYEE_HOME_ADDRESS, } = require('../queries/employee.queries');
 
 exports.getEmployee = async (req,res) => {
+    console.log("entered");
     const employee = req.employee;
     if (employee.id) {
         const con = await connection().catch((err) => {
@@ -31,7 +32,7 @@ exports.updateEmployee = async (req, res) => {
             throw err;
         });
 
-        if (req.body.last_name != undefined) {
+        if (req.body.last_name) {
             const updatedLast = await query(con, UPDATE_EMPLOYEE_LAST_NAME, [req.body.last_name, employee.id]).catch(
                 (err) => {
                     res.status(500).json({ msg: 'Could not update employee at this time.' });
@@ -39,7 +40,7 @@ exports.updateEmployee = async (req, res) => {
             );
         }
 
-        if (req.body.first_name != undefined) {
+        if (req.body.first_name) {
             const updatedFirst = await query(con, UPDATE_EMPLOYEE_FIRST_NAME, [req.body.first_name, employee.id]).catch(
                 (err) => {
                     res.status(500).json({ msg: 'Could not update employee at this time.' });
@@ -47,7 +48,7 @@ exports.updateEmployee = async (req, res) => {
             );
         }
 
-        if (req.body.home_address != undefined) {
+        if (req.body.home_address) {
             const updatedAddress = await query(con, UPDATE_EMPLOYEE_HOME_ADDRESS, [req.body.home_address, employee.id]).catch(
                 (err) => {
                     res.status(500).json({ msg: 'Could not update employee at this time.' });

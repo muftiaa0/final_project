@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+
+  <title>Home</title>
+</head>
+
+    <body>
+        <header>
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="./home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin/register.html">New Employee</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin/salary/promote-employee.html">Promote Employee</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./update-employee.html">Update Employee Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./update-password.html">Update Password</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="logout" href="/" onclick="doLogout(event)">Logout</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+    </body>
+<br>
+    <div class="center-text" id="employee">Getting Information...</div>
+    </body>
+    <script src="../lib/api.config.js"></script>
+    <script src="../lib/simple.storage.js"></script>
+    <script src="../lib/service.helpers.js"></script>
+    <script src="../auth/auth.service.js"></script>
+    <script src="../auth/auth.js"></script>    
+    <script src="../auth/auth-guard.js"></script>
+    <script src="./employee.service.js"></script>
+    <script src="./employee.js"></script>
+    <script src="./build-employee-info.js"></script>
+    <script src="../lib/app.js"></script>
+</html>

@@ -5,7 +5,7 @@ const canAccess = require('../middleware/auth.middleware')
 const salaryRoutes = express.Router();
 
 salaryRoutes
-    .get('/', canAccess, getSalary)
+    .post('/', canAccess, getSalary)
     .put('/update', canAccess, updateSalary) 
 
 module.exports = salaryRoutes;

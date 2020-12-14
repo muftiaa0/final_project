@@ -4,6 +4,13 @@
     left: 50%;
     transform: translate(-50%, -50%); 
   }
+
+  .centerScroll {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
   
   .task-form {
     margin: 50px 100px;
@@ -34,7 +41,7 @@
 
   .center-text {
       text-align: center;
-      color: red;
+      color: blue;
   }
 
   .left-text {
@@ -45,7 +52,10 @@
       align-content: center;
   }
   
-  html, body {
-      overflow-y: scroll;
+body {
+  background-color: lightgray;
+  overflow-y: scroll;
 }
+
+
   

@@ -1,16 +1,18 @@
-(async () => {
-    const employee = await getEmployee();
-    console.log(employee);
-    console.log(employee.first_name);
+class EmployeeInfo {
+    info = [];
+    employeeService = employeeService;
 
+    constructor() {}
 
-    if (employee.length) {
+    init() {
+        this.render();
+    }
+
+    _renderWelcomeMessage = (employee) => {
         const div = document.getElementById('employee');
-        const loadingDiv = div.childNodes[1];
-        
+        const loadingDiv = div.childNodes[0];
+        const fragment = document.createDocumentFragment();
         const ul = document.createElement('ul');
-
-        div.replaceChild(ul, loadingDiv);
 
         const header = document.createElement('h1');
         header.className = 'center-text';
@@ -47,11 +49,41 @@
         body.appendChild(updateMessage);
 
         var a = document.createElement('a');
-        a.setAttribute('href', '../update-employee.html');
+        a.setAttribute('href', './update-employee.html');
         a.innerHTML = "update employee information page "
         body.appendChild(a);
 
         ul.appendChild(header);
         ul.appendChild(body);
-    };
-})();
+        fragment.appendChild(ul);
+
+        div.replaceChild(fragment, loadingDiv);
+    }
+
+    _renderErrorMsg = (message) => {
+        const div = document.getElementById('employee');
+        const loadingDiv = div.childNodes[0];
+        const text = document.createTextNode(message);
+        const newDiv = document.createElement('div');
+        newDiv.id = 'error-message';
+        newDiv.className = 'center-text';
+        newDiv.appendChild(text);
+        div.replaceChild(newDiv, loadingDiv);
+    }
+
+    render = async () => {
+        console.log("hello");
+        const employee = await this.employeeService.getEmployee();
+        console.log(employee);
+        try {
+            if (employee.length) {
+                this.info = employee;
+                this._renderWelcomeMessage(employee);
+            } else {
+                this._renderErrorMsg(employee.msg);
+            }
+        } catch (err) {
+            alert(`Error: ${err.message}`);
+        }
+    }
+}

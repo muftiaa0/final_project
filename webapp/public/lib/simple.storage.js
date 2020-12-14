@@ -6,6 +6,11 @@ const setStorage = (key, data) => {
 
 const getStorage = (key) => {
     const encodedData = localStorage.getItem(key);
+
+    if (!encodedData) {
+        return null;
+    }
+
     const decodedData = atob(encodedData);
     return JSON.parse(decodedData);
 };
@@ -13,5 +18,6 @@ const getStorage = (key) => {
 const clearStorage = (key) => {
     localStorage.removeItem(key);
 };
+
 
 const storageHasData = () => localStorage.length > 0;

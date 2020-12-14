@@ -23,7 +23,6 @@ exports.login = async (req, res) => {
         }
     );
 
-    console.log(auth);
     if (auth.length < 1) {
         res.status(403).send({
             msg: 'Username does not exist.'
@@ -78,11 +77,11 @@ exports.newEmployee = async (req, res) => {
     });
 
 
+    if (req.body.last_name && req.body.first_name && req.body.username && req.body.home_address && req.body.yearly_salary) {
     // the new employee and newauth queries can happen at the same time independently but we want to make sure they occur before we retrieve the new employee.
     const newEmployee = await query(con, CREATE_EMPLOYEE, [req.body.last_name, req.body.first_name, req.body.username, req.body.home_address]).catch(
         (err) => {
-            res.status(500);
-            res.send({
+            res.status(500).send({
                 msg: 'Could not create employee because this username exists already'
             });
         }
@@ -90,8 +89,7 @@ exports.newEmployee = async (req, res) => {
 
     const newAuth = await query(con, NEW_AUTH, [req.body.username, passwordHash, isElevated]).catch(
         (err) => {
-            res.status(500);
-            res.send({
+            res.status(500).send({
                 msg: 'Could not create authentication information.'
             });
         }
@@ -99,19 +97,16 @@ exports.newEmployee = async (req, res) => {
 
     const newSalary = await query(con, NEW_SALARY, [req.body.username, req.body.yearly_salary]).catch(
         (err) => {
-            res.status(500);
-            res.send({
+            res.status(500).send({
                 msg: 'Invalid salary amount.'
             });
-
         }
     );
 
     if (newEmployee.affectedRows >= 1 && newAuth.affectedRows >= 1 && newSalary.affectedRows >= 1) {
         const employee = await query(con, GET_EMPLOYEE_FROM_USERNAME, [req.body.username]).catch(
             (err) => {
-                res.status(500);
-                res.send({
+                res.status(500).send({
                     msg: 'Could not retrieve the employee created.'
                 });
             }
@@ -122,46 +117,58 @@ exports.newEmployee = async (req, res) => {
             msg: 'New employee was not created successfully.'
         });
     }
+
+    } else {
+        res.status(500).send({
+            msg: 'Not all required fields were submitted.'
+        });
+    }
+    
 }
 
 exports.updatePassword = async (req, res) => {
     const employee = req.employee;
-    const passwordHash = bcrypt.hashSync(req.body.password);
 
-    if (employee.id) {
-        const con = await connection().catch((err) => {
-            throw err;
-        });
-
-        // does this username exist in the auth table?
-        const retrievedAuth = await query(con, GET_AUTH, [employee.id]).catch(
-            (err) => {
-                res.status(500).json({ msg: 'Could not retrieve authentication information at this time.' });
-            }
-        );
-        
-        if (!! retrievedAuth.length) {
-            const updatePassword = await query(con, UPDATE_PASSWORD, [passwordHash, employee.id]).catch(
+    if (req.body.password) {
+        const passwordHash = bcrypt.hashSync(req.body.password);
+        if (employee.id) {
+            const con = await connection().catch((err) => {
+                throw err;
+            });
+    
+            // does this username exist in the auth table?
+            const retrievedAuth = await query(con, GET_AUTH, [employee.id]).catch(
                 (err) => {
-                    res.status(500).json({ msg: 'Failed to update password.' });
+                    res.status(500).json({ msg: 'Could not retrieve authentication information at this time.' });
                 }
             );
-
-            console.log(updatePassword);
-            if (!updatePassword.length) {
-                res.send({ msg: 'Employee password updated successfully!' });
+    
+            if (!!retrievedAuth.length) {
+                const updatePassword = await query(con, UPDATE_PASSWORD, [passwordHash, employee.id]).catch(
+                    (err) => {
+                        res.status(500).json({ msg: 'Failed to update password.' });
+                    }
+                );
+    
+                console.log(updatePassword);
+                if (!updatePassword.length) {
+                    res.send({ msg: 'Employee password updated successfully!' });
+                } else {
+                    res.status(500).json({ msg: 'Failed to update password.' });
+                }
             } else {
-                res.status(500).json({ msg: 'Failed to update password.' });
+                res.status(500).json({ msg: 'Failed to retrieve authentication information.' });
             }
         } else {
-            res.status(500).json({ msg: 'Failed to retrieve authentication information.' });
+            res.status(403).json({ msg: 'Invalid Token' });
         }
+    } else {
+        res.status(500).json({ msg: 'Please specify a valid new password.' });
     }
 };
 
 
 exports.logout = async (req, res) => {
-    console.log(refreshTokens);
     const refreshToken = req.body.token;
     var tokenIndex = refreshTokens.indexOf(refreshToken);
     refreshTokens.splice(tokenIndex, 1);
@@ -169,7 +176,6 @@ exports.logout = async (req, res) => {
     res.json({
         msg: 'Logout Successful.'
     });
-    console.log(refreshTokens)
 };
 
 

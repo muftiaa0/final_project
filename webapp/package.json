@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.0.0-beta1",
     "express": "^4.17.1",
     "flexbox": "0.0.3",
     "nodemon": "^2.0.6"
-  }
+  },
+  "devDependencies": {}
 }

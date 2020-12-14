@@ -4,6 +4,10 @@
     width: 500px;
     padding: 20px;
   }
+
+  .overflow {
+    overflow-y: auto;
+  }
   
   .card-title,
   .form-group-btn {
@@ -17,4 +21,13 @@
   
   .left-border {
     padding-left: 50px;
+  }
+
+  .bg-custom1 {
+    background-color: lightslategray;
+  }
+
+  .scroll {
+    overflow-y: auto;
+    max-height: 400px;
   }
